@@ -127,7 +127,7 @@ public class OrderRepository {
 	
 	
 	/**
-	 * Here is the distribution of the orders:
+	 * The distribution of the orders:
 	 * 6 orders -- Iphone 12
 	 * 4 orders -- Samsung A1
 	 * 3 orders -- LG K10

@@ -3,6 +3,7 @@ package app.service;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,45 +27,72 @@ public class OrderService {
 	private List<Order> allOrders;
 
 	public OrderService() {
-		
 		repository = new OrderRepository();
 		allOrders = repository.loadData();
 	}
 	
-	public Map<String, Integer> filterOrders(LocalDateTime dateInit, LocalDateTime dateEnd) {
+	/**
+	 * Filter orders by all groups
+	 * @param dateInit
+	 * @param dateEnd
+	 * @return
+	 */
+	public Map<String, Integer> filterAllOrders(LocalDateTime dateInit, LocalDateTime dateEnd) {
 		Map<String, Integer> result = createResultDefault();
 		
+		// filter by interval specified in parameters
 		List<Order> ordersFilteredByDate = allOrders.stream()
 				.filter(order -> order.getDateOrder().isAfter(dateInit) && order.getDateOrder().isBefore(dateEnd))
 				.collect(Collectors.toList());
 		
 		if (!ordersFilteredByDate.isEmpty()) {
-			
-//			Integer until3Months = ordersFilteredByDate
-//					.forEach(order -> order.getItens()
-//							.stream()
-//							.filter(item -> item.getProduct().getCreationDate().isAfter(order.getDateOrder());
-			
-//			ordersFilteredByDate.stream().forEach(order -> order.getItens().forEach(item -> {
-//				long monthsBTWCreationAndOrder = ChronoUnit.MONTHS.between(
-//					     YearMonth.from(item.getProduct().getCreationDate()), 
-//					     YearMonth.from(order.getDateOrder()));
-//				
-//				if (monthsBTWCreationAndOrder < 4) {
-//					result.put(_1_3_MONTHS, result.get(_1_3_MONTHS) + 1);
-//				} else if (monthsBTWCreationAndOrder >= 4 && monthsBTWCreationAndOrder <= 6) {
-//					result.put(_4_6_MONTHS, result.get(_4_6_MONTHS) + 1);
-//				} else if (monthsBTWCreationAndOrder > 6 && monthsBTWCreationAndOrder <= 12) {
-//					result.put(_7_12_MONTHS, result.get(_7_12_MONTHS) + 1);
-//				} else {
-//					// > 12
-//					result.put(_12_MONTHS, result.get(_12_MONTHS) + 1);
-//				}
-//			}));
+
+			ordersFilteredByDate.stream().forEach(order -> order.getItens().forEach(item -> {
+				long monthsBTWCreationAndOrder = ChronoUnit.MONTHS.between(
+					     YearMonth.from(item.getProduct().getCreationDate()), 
+					     YearMonth.from(order.getDateOrder()));
+				
+				if (monthsBTWCreationAndOrder < 4) {
+					result.put(_1_3_MONTHS, result.get(_1_3_MONTHS) + 1);
+				} else if (monthsBTWCreationAndOrder >= 4 && monthsBTWCreationAndOrder <= 6) {
+					result.put(_4_6_MONTHS, result.get(_4_6_MONTHS) + 1);
+				} else if (monthsBTWCreationAndOrder > 6 && monthsBTWCreationAndOrder <= 12) {
+					result.put(_7_12_MONTHS, result.get(_7_12_MONTHS) + 1);
+				} else {
+					// > 12
+					result.put(_12_MONTHS, result.get(_12_MONTHS) + 1);
+				}
+			}));
 		}
 		
 		return result;
 		
+	}
+	
+	/**
+	 * It is called when the parameter is a period of months.
+	 * Example:
+	 * 1-3 (between 1 and 3 months)
+	 * @param monthInit
+	 * @param monthEnd
+	 * @return result
+	 */
+	public Map<String, Integer> filterOrdersBySpecificInterval(Integer monthInit, Integer monthEnd) {
+		Map<String, Integer> result = new HashMap<>();
+		
+		Long numberOfOrders = allOrders.stream().flatMap(order -> order.getItens()
+				.stream().filter(item -> 
+						ChronoUnit.MONTHS.between(
+								YearMonth.from(item.getProduct().getCreationDate()), 
+								YearMonth.from(order.getDateOrder())) >= monthInit 
+					     && 
+					     ChronoUnit.MONTHS.between(
+							     YearMonth.from(item.getProduct().getCreationDate()), 
+							     YearMonth.from(order.getDateOrder())) <= monthEnd)).count();
+		
+		result.put(monthInit+"-" + monthEnd + " months", numberOfOrders.intValue());
+		
+		return result;
 	}
 	
 	private Map<String, Integer>  createResultDefault() {
