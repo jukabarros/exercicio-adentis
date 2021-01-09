@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 public class Item {
 	
-	// final cost = product.price * amount (without discount)
 	private BigDecimal cost;
 	private BigDecimal shippingFee;
 	private BigDecimal taxAmount;
@@ -106,7 +105,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [cost=" + cost + ", shippingFee=" + shippingFee + ", taxAmount=" + taxAmount + "]";
+		return "Item [cost=" + cost + ", product=" + product + ", taxAmount=" + taxAmount + "]";
 	}
 	
 }

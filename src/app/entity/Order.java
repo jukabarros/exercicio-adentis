@@ -112,8 +112,8 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [customerName=" + customerName + ", customerContact=" + customerContact + ", shippingAddress="
-				+ shippingAddress + ", grandTotal=" + grandTotal + ", dateOrder=" + dateOrder + "]";
+		return "Order [customerName=" + customerName + ", item=" + itens + ""
+				+ " grandTotal=" + grandTotal + ", dateOrder=" + dateOrder + "]";
 	}
 
 }
