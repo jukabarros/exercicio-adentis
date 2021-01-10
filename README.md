@@ -32,9 +32,9 @@ Result:
 
 and >12 months: 3 orders
 
-(2) Example: by months
+(2) By Months
 
-$ java -jar orders.jar 1-3
+$ java -jar orders.jar 1-3 // it means between January and March
 
 1-3 months: 3 orders
 
