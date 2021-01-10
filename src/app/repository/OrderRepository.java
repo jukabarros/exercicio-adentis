@@ -26,11 +26,6 @@ public class OrderRepository {
 
 	/**
 	 * There are 4 products (cellphone) which each one represents a specific category based by creation date.
-	 * Here are the category:
-	 * 1-3 months
-	 * 4-6 months
-	 * 7-12 months
-	 * > 12 months
 	 * @return
 	 */
 	private List<Product> createProducts() {
