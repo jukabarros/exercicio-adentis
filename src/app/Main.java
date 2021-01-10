@@ -10,6 +10,12 @@ import app.service.OrderService;
 
 public class Main {
 
+	/**
+	 * Example of args:
+	 * java -jar "2018-01-01 00:00:00" "2019-01-01 00:00:00"
+	 * java -jar 7-12
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		Map<String, Integer> result = new HashMap<>();
@@ -35,6 +41,9 @@ public class Main {
 		try {
 			Integer initMonth = Integer.parseInt(init);
 			Integer endMonth = Integer.parseInt(end);
+			if (initMonth > endMonth) {
+				return null;
+			}
 			OrderService service = new OrderService();
 			
 			return service.filterOrdersBySpecificInterval(initMonth, endMonth);

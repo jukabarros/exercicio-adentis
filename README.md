@@ -18,7 +18,7 @@ age (creation date field in the product entity).
 If we have orders in the older intervals it means that olders products are still being sold.
 
 <b><h4> Examples </h4></b>
-(1) By specific period 
+(1) By specific period  (method filterAllOrders)
 
 $ java -jar orders.jar "2018-01-01 00:00:00" "2019-01-01 00:00:00"
 
@@ -32,7 +32,7 @@ Result:
 
 and >12 months: 3 orders
 
-(2) By Months
+(2) By Months (method filterOrdersBySpecificInterval)
 
 $ java -jar orders.jar 1-3 // it means between January and March
 

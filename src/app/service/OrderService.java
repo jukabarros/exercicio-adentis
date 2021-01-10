@@ -15,11 +15,8 @@ import app.repository.OrderRepository;
 public class OrderService {
 	
 	private static final String _12_MONTHS = ">12 months";
-
 	private static final String _7_12_MONTHS = "7-12 months";
-
 	private static final String _4_6_MONTHS = "4-6 months";
-
 	private static final String _1_3_MONTHS = "1-3 months";
 
 	private OrderRepository repository;
@@ -66,7 +63,6 @@ public class OrderService {
 		}
 		
 		return result;
-		
 	}
 	
 	/**
@@ -103,6 +99,5 @@ public class OrderService {
 		result.put(_12_MONTHS, 0);
 		return result;
 	}
-	
 
 }

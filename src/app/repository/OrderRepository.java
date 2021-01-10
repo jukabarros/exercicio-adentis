@@ -14,7 +14,7 @@ import app.entity.Product;
 
 /**
  * Represents the data storage.
- * In a real world, it could be a database or api
+ * In a real world, it could be a database or api or etc
  * @author juccelino.barros
  *
  */
@@ -25,7 +25,7 @@ public class OrderRepository {
 	private static final String I_PHONE_12 = "IPhone 12";
 
 	/**
-	 * There are 4 products (cellphone) which each one represents a specific category based by creation date.
+	 * There are 3 products (cellphone) which each one represents a specific category based by creation date.
 	 * @return
 	 */
 	private List<Product> createProducts() {
@@ -81,7 +81,6 @@ public class OrderRepository {
 		Order order6 = new Order("Juka", "", "", new BigDecimal("2600"), dateOrder6, new HashSet<>(Arrays.asList(item)));
 		
 		return Arrays.asList(order1, order2, order3, order4, order5, order6);
-				
 	}
 	
 	/**
@@ -102,7 +101,6 @@ public class OrderRepository {
 		Order order4 = new Order("Juliana", "", "", new BigDecimal("900"), dateOrder4, new HashSet<>(Arrays.asList(item)));
 		
 		return Arrays.asList(order1, order2, order3, order4);
-				
 	}
 	
 	
@@ -149,9 +147,6 @@ public class OrderRepository {
 		});
 		
 		return allOrders;
-		
 	}
-	
-	
 
 }
