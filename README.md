@@ -40,6 +40,7 @@ $ java -jar orders.jar 1-3 // it means between January and March
 
 <b><h4> Data Sample</h4></b>
 
+Period of the orders: 2018-01-01 and 2018-12-31
 
 Product: 3 (Iphone 12, Samsung A1, Nokia 1100)
 
